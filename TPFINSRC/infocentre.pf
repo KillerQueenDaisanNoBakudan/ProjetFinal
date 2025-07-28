@@ -1,0 +1,15 @@
+      *%METADATA                                                       *
+      * %TEXT PF Infocentre                                            *
+      *%EMETADATA                                                      *
+     A                                      REF(BDVIN3/PRODUCTEUR)
+     A          R INFOCF1
+     A            PR_CODE   R               COLHDG('Code Producteur')
+     A            PR_NOM    R               COLHDG('Nom Producteur')
+     A            PR_TEL    R               COLHDG('Telephone Producteur')
+                                            ALWNULL
+     A            APPEL00001R               REFFLD(APPEL00001 BDVIN3/APPELLATIO)
+                                            COLHDG('Nom Appellation')
+     A            NBRVINS        5S         COLHDG('Nombre de vin')
+     A            EN_CAVE        1A         VALUES('O' 'N')
+     A            CEPAGE        25A         COLHDG('Cépage plus utilisé')
+     A            NBCEPAGE       5S         COLHDG('Nombre de cépage')

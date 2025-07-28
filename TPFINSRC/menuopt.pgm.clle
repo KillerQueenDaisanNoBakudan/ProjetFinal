@@ -1,0 +1,70 @@
+      /*%METADATA                                                     */
+      /* %TEXT CLLE pour les option du dspf                           */
+      /*%EMETADATA                                                    */
+PGM
+/* Programme de pilotage du menu d'exploitation */
+/* Déclaration du fichier écran et de son format */
+DCLF       FILE(FORMATION3/MENUEXPL) RCDFMT(RECORD1)
+
+/* Déclaration de infocentre avec openID */
+DCLF       FILE(FORMATION3/INFOCENTRE) OPNID(INFOC3)
+/* Affiche l'écran et attend une action de l'utilisateur */
+SNDRCVF    RCDFMT(RECORD1)
+/* Tant qu'on ne fait pas F3 ou une des option, on reste afficher */
+DOWHILE    COND(&IN03 = '0')
+   SELECT
+/*    Option 1 : Régénération de infocentre */
+      WHEN       COND(&OPTION = '1') THEN(DO)
+   /* On efface infocentre s'il existe déjà */
+         CHGVAR     VAR(&IN32) VALUE('1')
+         CLRPFM     FILE(FORMATION3/INFOCENTRE)
+
+   /* On appelle FILINFO pour remplir infocentre */
+         CALL       PGM(FORMATION3/FILINFOSQL)
+         CHGVAR     VAR(&IN32) VALUE('0')
+
+      ENDDO
+
+/*    Option 2 : Affichage des enregistrement sur un écran EXPINFO par appel de MNGENR */
+      WHEN       COND(&OPTION = '2') THEN(DO)
+         RCVF       OPNID(INFOC3)
+         /* Dans le cas où la table est vide, on la rempli quand même */
+         MONMSG     MSGID(CPF0864) EXEC(DO)
+            CHGVAR     VAR(&IN32) VALUE('1')
+            CALL       PGM(FORMATION3/FILINFOSQL)
+         ENDDO
+         /* On close pour éviter les problème*/
+         CLOSE      OPNID(INFOC3)
+         CALL       PGM(FORMATION3/MNGENR)
+         CHGVAR     VAR(&IN32) VALUE('0')
+      ENDDO
+
+/*     Option 3 : Gestion des enregistrement sur un écran EXPINFOPT3 par appel de MNGENROPT3  */
+      WHEN       COND(&OPTION = '3') THEN(DO)
+         RCVF       OPNID(INFOC3)
+         MONMSG     MSGID(CPF0864) EXEC(DO)
+            CHGVAR     VAR(&IN32) VALUE('1')
+            CALL       PGM(FORMATION3/FILINFOSQL)
+         ENDDO
+         CLOSE      OPNID(INFOC3)
+         CALL       PGM(FORMATION3/MNGENROP3)
+         CHGVAR     VAR(&IN32) VALUE('0')
+      ENDDO
+
+/*    Option 4 : Génération du fichier CSV dans l'isf avec un encodage utf8 */
+      WHEN       COND(&OPTION = '4') THEN(DO)
+         CPYTOIMPF  FROMFILE(FORMATION3/INFOCENTRE) TOSTMF('/home/formation3/infocentre.csv') +
+                      MBROPT(*REPLACE) STMFCODPAG(1208) RCDDLM(*CRLF)
+      ENDDO
+/*    Option 5 : Impression du fichier spoule */
+      WHEN       COND(&OPTION = '5') THEN(DO)
+         /* Appel du PGM pour imprimer le fichier spoule */
+         CALL       PGM(FORMATION3/OPT5RPG)
+         /* Affichage du fichier spoule formaté */
+         DSPSPLF    FILE(OPT5PRTF) SPLNBR(*LAST) CRTDATE(*ONLY)
+      ENDDO
+   ENDSELECT
+   /* Réaffichage de l'écran car sinon la boucle est infini */
+   SNDRCVF    RCDFMT(RECORD1)
+ENDDO
+ENDPGM

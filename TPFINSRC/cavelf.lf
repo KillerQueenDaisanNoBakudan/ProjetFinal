@@ -1,0 +1,7 @@
+      *%METADATA                                                       *
+      * %TEXT Fichier logique des cave avec idx sur vins               *
+      *%EMETADATA                                                      *
+     A          R CAVEF                     PFILE(BDVIN3/MA_CAVE)
+     A          K VIN_CODE
+     A* LF fait à partir du PF des cave avec une clé sur le vin_code
+     A* IMPORTANT : LE LF DOIT AVOIR LE MEME FORMAT QUE LE PF

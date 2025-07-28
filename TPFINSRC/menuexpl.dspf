@@ -1,0 +1,26 @@
+      *%METADATA                                                       *
+      * %TEXT Menu d'exploitation                                      *
+      *%EMETADATA                                                      *
+     A          R RECORD1                   CA03(03)
+     A                                  2  3DATE
+     A                                  3  3TIME
+     A                                  2 21'*** Menu exploitation INFOCENTRE *-
+     A                                      **'
+     A                                      COLOR(TRQ)
+     A                                  2 69SYSNAME
+     A                                  3 69USER
+     A                                  7 21'1. Génération du fichier'
+     A                                  8 21'2. Vérification du fichier'
+     A                                  9 21'3. Modification du fichier'
+     A                                 10 21'4. Génération du CSV'
+     A                                 11 21'5. Impression du fichier'
+     A                                 15 21'Choisissez votre option puis faite-
+     A                                      s entrée'
+     A                                      COLOR(PNK)
+     A                                 17 21'Option'
+     A                                      COLOR(RED)
+     A            OPTION         1   I 17 34COLOR(RED)
+     A                                      VALUES('1' '2' '3' '4' '5')
+     A                                 23  5'F3 = Sortie'
+     A                                      COLOR(BLU)
+     A  32                             21  5'Génération en cours'

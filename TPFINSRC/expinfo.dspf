@@ -1,0 +1,35 @@
+      *%METADATA                                                       *
+      * %TEXT DSPF Exploitation info centre                            *
+      *%EMETADATA                                                      *
+     A          R FMTENR                    SFL
+     A            PR_CODE   R        O  5  2REFFLD(INFOCF1/PR_CODE FORMATION3/I-
+     A                                      NFOCENTRE)
+     A                                      EDTCDE(Z)
+     A            PR_NOM    R        O  5 13REFFLD(INFOCF1/PR_NOM FORMATION3/IN-
+     A                                      FOCENTRE)
+     A            NBCEPAGE  R        O  5 66REFFLD(INFOCF1/NBCEPAGE FORMATION3/-
+     A                                      INFOCENTRE)
+     A                                      EDTCDE(3)
+     A          R FMTCTL                    SFLCTL(FMTENR)
+     A                                      SFLDSPCTL
+     A                                      SFLDSP
+     A                                      SFLPAG(10)
+     A                                      SFLSIZ(11)
+     A                                      CA12(12)
+     A  34                                  SFLEND(*MORE)
+     A                                      OVERLAY
+     A                                      PROTECT
+     A                                  4  7'Code'
+     A                                      COLOR(BLU)
+     A                                  4 13'Nom du producteur'
+     A                                      COLOR(BLU)
+     A                                  4 69'Nb cépage'
+     A                                      COLOR(BLU)
+     A                                  1 23'AFFICHAGE DES ENREGISTREMENTS'
+     A                                      COLOR(BLU)
+     A          R TOUCHES
+     A                                 23  4'F12 = Annuler'
+     A                                      COLOR(BLU)
+
+
+

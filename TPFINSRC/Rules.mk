@@ -1,0 +1,14 @@
+FILINFOSQL.PGM: filinfosql.pgm.sqlrpgle INFOCENTRE.FILE BDVINXLF.FILE CAVELF.FILE
+MNGENR.PGM: mngenr.pgm.sqlrpgle EXPINFO.FILE INFOCENTRE.FILE
+OPT5RPG.PGM: opt5rpg.pgm.sqlrpgle INFOCENTRE.FILE OPT5PRTF.FILE
+MNGENROP3.PGM: mngenrop3.pgm.sqlrpgle EXPINFOPT3.FILE INFOCENTRE.FILE
+INFOCENTRE.FILE: infocentre.pf
+BDVINXLF.FILE: bdvinxlf.lf
+CAVELF.FILE: cavelf.lf
+EXPINFO.FILE: expinfo.dspf
+EXPINFOPT3.FILE: expinfopt3.dspf
+MENUEXPL.FILE: menuexpl.dspf
+MENUOPT.PGM: menuopt.pgm.clle
+OPT5PRTF.FILE: opt5prtf.prtf
+RSE7149973.PGM: rse7149973.pgm.rpgle
+RSE7573842.PGM: rse7573842.pgm.sqlrpgle

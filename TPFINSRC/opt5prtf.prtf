@@ -1,0 +1,65 @@
+      *%METADATA                                                       *
+      * %TEXT Fichier imprimante pour opt 5                            *
+      *%EMETADATA                                                      *
+     A          R ENTETE                    SKIPB(2)
+     A                                      SPACEA(1)
+     A                                      SPACEB(0)
+     A                                     2DATE(*JOB *YY)
+     A                                      EDTCDE(Y)
+     A                                    18TIME
+     A                                    50'Fichier d''impression : Infocentre'
+     A            USER          10       113
+     A                                   114' '
+     A                                     2'-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      --------------------------'
+     A                                      SPACEB(2)
+     A                                     2'Code producteur'
+     A                                      SPACEB(1)
+     A                                    17'|'
+     A                                    20'Nom du producteur'
+     A                                    70'|'
+     A                                    72'Nombre de vins'
+     A                                    87'|'
+     A                                    89'Cépage le plus utilisé'
+     A                                     2'-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      --------------------------'
+     A                                      SPACEB(1)
+     A          R DONNEE                    SPACEA(1)
+     A                                    17'|'
+     A            PR_NOM    R             19REFFLD(INFOCF1/PR_NOM FORMATION3/IN-
+     A                                      FOCENTRE)
+     A                                    70'|'
+     A            NBRVINS   R             72REFFLD(INFOCF1/NBRVINS FORMATION3/I-
+     A                                      NFOCENTRE)
+     A                                      EDTCDE(3)
+     A                                    87'|'
+     A            CEPAGE    R             89REFFLD(INFOCF1/CEPAGE FORMATION3/IN-
+     A                                      FOCENTRE)
+     A            PR_CODE   R              2REFFLD(INFOCF1/PR_CODE FORMATION3/I-
+     A                                      NFOCENTRE)
+     A                                      EDTCDE(3)
+     A          R TOTAL                     SKIPB(60)
+     A                                     2'Total producteurs :'
+     A            PR_TOT         5  0     23EDTCDE(3)
+     A                                    39'Total des vins : '
+     A            VIN_TOT        5  0     57EDTCDE(3)
+
+
+
+
+     A*%%RS+<record-sequences>
+     A*%%RS+ <sequence name="Liste producteur">
+     A*%%RS+  <device type="printer" width="132" height="66" />
+     A*%%RS+  <record-write record-format="ENTETE" />
+     A*%%RS+  <record-write record-format="DONNEE" />
+     A*%%RS+  <record-write record-format="DONNEE" />
+     A*%%RS+  <record-write record-format="DONNEE" />
+     A*%%RS+  <record-write record-format="DONNEE" />
+     A*%%RS+  <record-write record-format="DONNEE" />
+     A*%%RS+  <record-write record-format="TOTAL" />
+     A*%%RS+ </sequence>
+     A*%%RS </record-sequences>

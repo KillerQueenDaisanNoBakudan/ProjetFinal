@@ -1,0 +1,7 @@
+      *%METADATA                                                       *
+      * %TEXT LF BDVINX Avec index sur les codes pr et vin             *
+      *%EMETADATA                                                      *
+     A          R VINSF                     PFILE(BDVIN3/VINS)
+     A          K PR_CODE
+     A* LF fait à partir du PF des vins avec une clé sur le pr_code
+     A* IMPORTANT : LE LF DOIT AVOIR LE MEME FORMAT QUE LE PF
