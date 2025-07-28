@@ -1,0 +1,73 @@
+**free
+//pour le fun : 'directives de compilation'
+// on connait /copy ou /include....
+
+//ici, on définit une 'variable' (MSGS)
+// si elle est déjà définie (if defined...)
+// on n'inclut pas le source... (/eof)
+// ce principe permet de n'inclure qu'UNE fois
+// le source lors d'une compilation
+/if defined(MSGS)
+/eof
+/endif
+/define MSGS
+
+// MODMSGS.H
+
+// @Purpose - Gérer les messages programmes
+//            prototypes Header (.h) à inclure
+
+// @author eric froehlicher
+
+//  @Date Apr 23, 2024
+
+// Change Log:
+// Tag      Date        User             Description
+//
+//
+//
+//=== Prototypes for MODMSGS routines ========================
+
+dcl-pr SndMsgPgmQ;   // Send Msg to PGM Q
+    *n char(10) ;                      // pMsgQ
+    *n char(7) value;                       // pMsgid
+    *n char(10) value;                      // pMsgFile
+    *n varchar(512) value options(*nopass); // pMsgDta
+end-pr;
+
+
+
+
+//============================================================
+dcl-pr ClrMsgPgmQ ind; // Clear PGM Msg Q
+    *n char(10);            // pPgmMsgQ
+end-pr;
+
+
+
+
+//============================================================
+dcl-pr SndEscMsg;        // Send ESC Msg
+    *n varchar(512) const;             // piMsg
+    *n int(10) const options(*nopass); // pStackEnt
+end-pr;
+
+
+
+
+//============================================================
+dcl-pr SndInfMsg;        // Send INF Msg
+    *n varchar(512) const;    // piMsg
+end-pr;
+
+
+
+
+//============================================================
+dcl-pr JobLogMsg;
+    *n varchar(512) value; // piMsg  Msg to job log
+end-pr;
+
+
+
+//=== End of Prototypes forSRV_MSG Routines ==================

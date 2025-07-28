@@ -1,0 +1,147 @@
+     ***************************************************************
+     ** Name:                                                     **
+     **                                                           **
+     ** Author:                                                   **
+     **                                                           **
+     ** Date:                                                     **
+     **                                                           **
+     ** Description:                                              **
+     **                                                           **
+     ** Change Log:                                               **
+     **                                                           **
+     ***************************************************************
+     A                                      REF(INFOCENTRE)
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      CA12(12 'F12=Retour')
+
+     A* ========================================================================
+     A* Datas Subfile
+     A* ------------------------------------------------------------------------
+     A          R SFLPRD                    SFL
+     A            PRDRRN         4S 0H
+     A            SFOPT          1A  B  7  3
+     A            CDPROD    R        O  7  6REFFLD(INFOC1/PR_CODE)
+     A            NMPROD    R        O  7 17REFFLD(INFOC1/PR_NOM)
+     A  90                                  COLOR(RED)
+     A            NBCEPA    R        O  7 69REFFLD(INFOC1/NBCEPAGE)
+
+     A* ------------------------------------------------------------------------
+     A* Datas  Subfile - Control formatN
+     A* ------------------------------------------------------------------------
+     A          R CTLPRD                    SFLCTL(SFLPRD)
+     A                                      CA03(03 'F3=Sortie')
+      * dans la version SQL, on va gérer le sous fichier en dynamique
+     A                                      SFLSIZ(14)
+     A                                      SFLPAG(14)
+     A                                      ROLLUP(61 'rollup')
+     A                                      ROLLDOWN(62 'rolldown')
+      * / sous fichier dynamique
+     A                                      OVERLAY
+     A  31                                  SFLDSP
+     A  30                                  SFLDSPCTL
+     A N30                                  SFLCLR
+     A  30                                  SFLEND(*MORE)
+      * MNTINFOCSD : plus besoin de SFLRCDNBR, sous fichier dynamique
+     A*            S_RECNO        4S 0H      SFLRCDNBR
+     A            PGMNAM        10A     1  2COLOR(BLU)
+     A            TITRE         28A     1 26DSPATR(HI)
+     A                                  1 70DATE(*YY)
+     A                                      EDTCDE(Y)
+     A                                      COLOR(BLU)
+     A                                  2  1SYSNAME
+     A                                      COLOR(BLU)
+     A                                  2 72TIME
+     A                                      COLOR(BLU)
+     A                                  3  2'Choisissez l''option, -
+     A                                       puis "Entrée", ou F12 -
+     A                                       pour annuler'
+     A            TTOPT         70A     4  2COLOR(WHT)
+     A                                  6  1'Opt'
+     A                                      DSPATR(HI)
+     A                                  6  6'Code'
+     A                                      DSPATR(HI)
+     A                                  6 17'Producteur'
+     A                                      DSPATR(HI)
+     A                                  6 69'Nb Cép.'
+     A                                      DSPATR(HI)
+
+     A*--------------------------------------------------------------------
+     A* Footer : touches de fonction
+     A* ------------------------------------------------------------------------
+     A          R FCT                       OVERLAY
+     A                                 23  1'F3: sortie    F12: retour'
+     A                                      COLOR(BLU)
+     A
+
+
+     A* ========================================================================
+     A* Message Subfile
+     A* ------------------------------------------------------------------------
+     A          R MSGSFL                    SFL
+     A                                      SFLMSGRCD(24)
+     A            MSGKEY                    SFLMSGKEY
+     A            PGMNAM                    SFLPGMQ
+
+     A* ------------------------------------------------------------------------
+     A* Message Subfile - Control format
+     A* ------------------------------------------------------------------------
+     A          R MSGCTL                    SFLCTL(MSGSFL)
+     A                                      OVERLAY
+     A                                      SFLINZ
+     A                                      SFLPAG(1)
+     A                                      SFLSIZ(2)
+     A                                      SFLDSP SFLDSPCTL
+     A  52
+     AON52                                  SFLEND(*PLUS)
+     A            PGMNAM                    SFLPGMQ
+
+
+     A* ------------------------------------------------------------------------
+     A* Détail d'un producteur.
+     A* on conditionne les zones en fonction de l'affichage ou de la
+     A*     maintenance
+     A* ------------------------------------------------------------------------
+     A          R DETPROD                   WINDOW(11 3 11 74)
+     A                                      WDWTITLE(+
+     A                                          (*TEXT &WINTTL) +
+     A                                          (*COLOR WHT) +
+     A                                      )
+     A*                                      WDWBORDER(+
+     A*                                        (*COLOR WHT) +
+     A**                                       (*DSPATR HI) +
+     A*                                        (*CHAR ' _ |||_|')+
+     A*                                      )
+     A                                      CF09(09 'F9=confirmer')
+     A*           PGMNAM        10A     1  2COLOR(BLU)
+     A                                  2  2'Producteur'
+     A            PR_NOM    R        B  2 23REFFLD(INFOC1/PR_NOM)
+     A  50                                  DSPATR(PR)
+     A                                  3  2'Téléphone'
+     A            PR_TEL    R        B  3 23REFFLD(INFOC1/PR_TEL)
+     A  50                                  DSPATR(PR)
+     A                                  4  2'Appellation'
+     A            APPELAT       50A  B  4 23
+     A  50                                  DSPATR(PR)
+     A                                  5  2'Nombre de vins'
+     A            NBRVINS   R        B  5 23REFFLD(INFOC1/NBRVINS)
+     A  50                                  DSPATR(PR)
+     A                                  6  2'En Cave ?'
+     A            INCAV          3   B  6 23
+     A  50                                  DSPATR(PR)
+     A                                  7  2'Cépage le + utilisé'
+     A            CEPAGE    R        B  7 23REFFLD(INFOC1/CEPAGE)
+     A  50                                  DSPATR(PR)
+     A                                  8  2'NB cépages'
+     A            NBCEPAGE  R        B  8 23REFFLD(INFOC1/NBCEPAGE)
+     A  50                                  DSPATR(PR)
+     A            WINTTL        30A  P
+     A                                  9  2'F9: Valider  F12:Annuler'
+     A                                      COLOR(BLU)
+
+
+     A          R CLRSCR                    TEXT('Dummy Format')
+     A                                      ASSUME
+     A                                  1  2' '
+     A                                      DSPATR(ND)
+
+

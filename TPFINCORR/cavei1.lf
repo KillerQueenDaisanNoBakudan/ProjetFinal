@@ -1,0 +1,11 @@
+      ***********************************************************
+      * création du logique cavei1 (si non existant)
+      *  logique sur la table MA_CAVE
+      *  trié par vin_code
+      ***********************************************************
+      *                                     pour l'exemple, j'ai
+      *                                     généré le corrigé
+      *                                     à partir de
+      *                                     formation8/bdvin8
+     A          R CAVEF                     PFILE(BDVIN8/MA_CAVE)
+                K VIN_CODE

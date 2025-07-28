@@ -1,0 +1,9 @@
+pour que les compls se passent bien :
+
+crtrpgmod modmsg
+crtdbddir UTIL_BND
+wrkbnddir UTIL_BND
+     et ajouter manuellement le module MODMSGS
+
+ensuite, vous pouvez compiler les programmes mnt....
+

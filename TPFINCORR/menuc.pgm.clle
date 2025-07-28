@@ -1,0 +1,76 @@
+pgm
+
+/***************************************************************/
+/* Modifications                                               */
+/* code      programmeur             description               */
+/* 2B4                               rajout option 4 : copie   */
+/*                                   de infocentre dans l'ifs  */
+/*                                   au format csv             */
+/***************************************************************/
+
+dclf menud
+
+monmsg cpf0000
+
+/* on peut préparer la *libl pour qu'il n'y ait aucun problème */
+/* 1) on 'essaie d'enlever un bibliothèque : */
+/* ==>si elle est présente dans la *libl, elle sera enlevée */
+/* ==> si elle n'est pas présente, on monitore le message */
+rmvlible bdvin8
+/* monmsg est déjà pris en compte plus haut */
+
+/* on la rajoute en PREMIERE position dans la libl */
+/* comme cela, on est sur d'ouvrir les fichiers dans la bonne bib */
+/* sauf si un fichier du même nom est dans la *CURLIB ou dans la  */
+/* partie SYS de la *LIBL... c'est toutjours le risque            */
+addlible bdvin8 *first
+
+dountil (&in03)
+    sndrcvf rcdfmt(menuf)
+
+    /* Touche(s) de fonction activée(s) ? */
+    if (&in03) then(iterate)
+    /*....*/
+
+    /* on lance ce qu'il faut faire selon l'option choisie */
+    /* MEME si les programmes n'existent pas encore !!!!   */
+
+    /* option 1 : remplissage infocentre */
+    if (&option = '1') then(do)
+        clrpfm infocentre
+        call fillinfo2
+        iterate
+    enddo
+
+    /* option 2 ou 3 : affichage ou maintenance des informations infocentre */
+    if ((&option = '2') *or (&option = '3')) then(do)
+
+        call mntinfoc &option
+        iterate
+
+    enddo
+
+
+    /* option 4 : export des informations en csv */
+    if (&option = '4') then(do)
+
+        /* 2B4 */
+        CPYTOIMPF FROMFILE(INFOCENTRE) TOSTMF('/home/EF/datas_infocentre.csv') +
+        STMFCCSID(*PCASCII) RCDDLM(*CRLF) STRDLM('"') FLDDLM(';') +
+        DECPNT(*COMMA)
+        SNDPGMMSG msg('Fichier data_infocentre.csv créé ou modifié!')
+        /* fin 2B4 */
+        iterate
+
+    enddo
+
+    /* option 5 : impression infocentre */
+    if (&option = '5') then(do)
+        call prtinfoc
+        iterate
+    enddo
+
+/* fin de la boucle principale et reour à l'écran */
+enddo
+
+endpgm

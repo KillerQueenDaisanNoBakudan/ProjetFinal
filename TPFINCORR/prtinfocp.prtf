@@ -1,0 +1,53 @@
+
+     A                                      REF(INFOCENTRE)
+      * entéte du document
+     A          R PAGEF
+     A                                  2  2'Le'
+     A                                  2  5DATE(*SYS *YY)
+     A                                      EDTWRD('  /  /    ')
+     A                                  2 16'à'
+     A                                  2 18TIME
+     A                                  2 51'Producteur du fichier INFOCENTRE'
+     A                                      HIGHLIGHT
+     A                                      UNDERLINE
+     A                                  2115'Par'
+     A            PUSER         10      2119
+     A                                  5  5'Code     '
+     A                                      UNDERLINE
+     A                                  5 19'Nom producteur                    -
+     A                                                      '
+     A                                      UNDERLINE
+     A                                  5 74'Nb. vins'
+     A                                      UNDERLINE
+     A                                  5 87'Cépage le plus utilisé   '
+     A                                      UNDERLINE
+
+      * ligne détail
+     A          R LIGNEF
+     A            PR_CODE   R              5REFFLD(INFOC1/PR_CODE)
+     A                                      SPACEB(1)
+     A                                      EDTCDE(3)
+     A                                    16'|'
+     A            PR_NOM    R             19REFFLD(INFOC1/PR_NOM)
+     A                                    71'|'
+     A            NBRVINS   R             74REFFLD(INFOC1/NBRVINS)
+     A                                      EDTCDE(3)
+     A                                    84'|'
+     A            CEPAGE    R             87REFFLD(INFOC1/CEPAGE)
+
+      *
+      * onrajoute un format total pour afficher le bombre total de producteurs
+      *
+     A          R TOTALF                    SPACEB(1)
+     A                                     6'Nombre total de producteurs :'
+     A                                      SPACEB(2)
+     A                                      HIGHLIGHT
+     A            NBTOTPROD     10  0     36HIGHLIGHT
+     A                                      EDTCDE(1)
+     A                                    73'Nombre total de vins :'
+     A                                      HIGHLIGHT
+     A            NBTOTVINS     10  0     96HIGHLIGHT
+     A                                      EDTCDE(1)
+     A                                    54'********** FIN **********'
+     A                                      SPACEB(1)
+     A                                      HIGHLIGHT

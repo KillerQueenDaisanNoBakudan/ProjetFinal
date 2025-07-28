@@ -1,0 +1,11 @@
+      ***********************************************************
+      * création du logique vini1 (si non existant)
+      *  logique sur la table VINS
+      *  trié par pr_code
+      ***********************************************************
+      *                                     pour l'exemple, j'ai
+      *                                     généré le corrigé
+      *                                     à partir de
+      *                                     formation8/bdvin8
+     A          R VINSF                     PFILE(BDVIN8/VINS)
+                K PR_CODE

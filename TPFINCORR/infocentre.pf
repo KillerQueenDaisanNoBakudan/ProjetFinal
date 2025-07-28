@@ -1,0 +1,18 @@
+      *%METADATA                                                       *
+      * %TEXT table infocentre                                         *
+      *%EMETADATA                                                      *
+
+     A          R INFOC1
+     A            PR_CODE   R               REFFLD(PRODF/PR_CODE +
+     A                                             BDVIN8/PRODUCTEUR)
+     A            PR_NOM    R               REFFLD(PRODF/PR_NOM  +
+     A                                             BDVIN8/PRODUCTEUR)
+     A            PR_TEL    R               REFFLD(PRODF/PR_TEL  +
+     A                                             BDVIN8/PRODUCTEUR)
+     A            APPEL00001R               REFFLD(APPELF/APPEL00001 +
+     A                                             BDVIN8/APPELLATIO)
+     A            NBRVINS        5  0       COLHDG('Nb' 'Vins')
+     A            ENCAVE         1          COLHDG('En' 'Cave')
+     A            CEPAGE    R               REFFLD(VINSF/VIN_C00001 +
+     A                                             BDVIN8/VINS)
+     A            NBCEPAGE       2  0       COLHDG('Nb' 'Cép.')

@@ -1,0 +1,4 @@
+      * 2B peut être a-t-on besoin d'un index ?
+     A                                      UNIQUE
+     A          R INFOC1                    PFILE(INFOCENTRE)
+     A          K PR_CODE

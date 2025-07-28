@@ -1,0 +1,30 @@
+     A          R MENUF                     CA03(03)
+
+      * entète de l'écran
+     A                                  2  2DATE(*SYS *YY)
+     A                                      EDTWRD('  /  /    ')
+     A                                  2 23'*** Menu exploitation INFOCENTRE *-
+     A                                      **'
+     A                                      COLOR(WHT)
+     A                                  2 70SYSNAME
+     A                                  3  2TIME
+     A                                  3 70USER
+
+      * corps : affichage des options et zone de saisie
+     A                                  8 21'1: Génération du fichier'
+     A                                  9 21'2: Vérification du fichier'
+     A                                 10 21'3: Modification du fichier'
+     A                                 11 21'4: Génération du CSV'
+     A                                 12 21'5: Impression du fichier'
+     A                                 15 15'Choisissez votre option, puis -
+     A                                       "Entrée"'
+     A                                      COLOR(PNK)
+     A                                 17 21'Option'
+     A                                      COLOR(RED)
+     A            OPTION         1N  I 17 28COLOR(RED)
+     A                                      VALUES('1' '2' '3' '4' '5' ' ')
+
+      * bandeau du texte des touches de fonction
+     A                                 23  3'F3=Sortie'
+     A                                      COLOR(BLU)
+
